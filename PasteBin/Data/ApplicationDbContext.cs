@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PasteBin.Models;
 
 namespace PasteBin.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -12,8 +13,16 @@ namespace PasteBin.Data
         }
 
 
-        public DbSet<Users> usersDb { get; set; }
-        public DbSet<Pastes> pastesDb { get; set; }
-        public DbSet<Views> viewsDb { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Pastes> Pastes { get; set; }
+        public DbSet<View> Views { get; set; }
+    }
+    public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    {
+        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+        {
+            builder.Property(u => u.Name);
+        }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace PasteBin.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PasteBin.Models
 {
     public class Pastes
     {
@@ -8,7 +10,10 @@
         public DateTime CreatedAt { get; set; }
         public DateTime? ExpirationData { get; set; }
 
-        public ICollection<Users> pastesUsers { get; set; } 
-        public ICollection<Views> pastesViews { get; set; }
+        public View? View { get; set; }
+
+        [ForeignKey("User")]
+        public int? CurrentUserID { get; set; }
+        public User? User { get; set; }
     }
 }
