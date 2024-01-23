@@ -15,7 +15,7 @@ namespace PasteBin.Models
         public View? View { get; set; }
 
         [ForeignKey("User")]
-        public int? CurrentUserID { get; set; }
+        public string? CurrentUserID { get; set; }
         public User? User { get; set; }
     }
 }

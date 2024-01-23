@@ -13,7 +13,7 @@ namespace PasteBin.Models
         public Pastes? Pastes{ get; set;}
 
         [ForeignKey("User")]
-        public int? CurrentUserID { get; set; }
+        public string? CurrentUserID { get; set; }
         public User? User { get; set; }
     }
 }
