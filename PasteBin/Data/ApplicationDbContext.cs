@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PasteBin.Models;
 
 namespace PasteBin.Data
 {
@@ -9,5 +10,10 @@ namespace PasteBin.Data
             : base(options)
         {
         }
+
+
+        public DbSet<Users> usersDb { get; set; }
+        public DbSet<Pastes> pastesDb { get; set; }
+        public DbSet<Views> viewsDb { get; set; }
     }
 }

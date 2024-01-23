@@ -7,5 +7,8 @@
         public string? Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ExpirationData { get; set; }
+
+        public ICollection<Users> pastesUsers { get; set; } 
+        public ICollection<Views> pastesViews { get; set; }
     }
 }
