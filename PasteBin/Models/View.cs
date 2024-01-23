@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PasteBin.Models
 {
     public class View
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string? ViewID { get; set; }
         public string? PasteID { get; set;}
         public string? UserID { get; set;}
