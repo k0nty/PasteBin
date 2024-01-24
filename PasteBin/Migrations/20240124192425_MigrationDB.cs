@@ -180,6 +180,7 @@ namespace PasteBin.Migrations
                 columns: table => new
                 {
                     PastesID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),

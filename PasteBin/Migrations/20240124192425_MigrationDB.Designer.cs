@@ -12,7 +12,7 @@ using PasteBin.Data;
 namespace PasteBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240124084828_MigrationDB")]
+    [Migration("20240124192425_MigrationDB")]
     partial class MigrationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,6 +249,9 @@ namespace PasteBin.Migrations
 
                     b.Property<DateTime?>("ExpirationData")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");

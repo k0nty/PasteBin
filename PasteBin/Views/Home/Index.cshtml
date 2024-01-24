@@ -1,8 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "PasteBin";
 }
+-
+<h1>Create New Paste</h1>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form id="createPasteForm">
+    <div class="form-group">
+        <label for="pasteTitle">Paste title:</label>
+        <input class="form-control" id="pasteTitle" name="Title" required type="text" />
+        <label for="pasteContent">Paste Content:</label>
+        <textarea class="form-control" id="pasteContent" name="Content" required></textarea>
+    </div>
+
+    <button id="createPaste" type="button" class="btn btn-primary mt-4 w-100">Create Paste</button>
+</form>

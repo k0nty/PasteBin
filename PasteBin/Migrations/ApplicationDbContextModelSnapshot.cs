@@ -248,6 +248,9 @@ namespace PasteBin.Migrations
                     b.Property<DateTime?>("ExpirationData")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
