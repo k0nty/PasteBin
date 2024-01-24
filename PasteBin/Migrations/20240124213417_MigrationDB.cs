@@ -183,7 +183,6 @@ namespace PasteBin.Migrations
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpirationData = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CurrentUserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -204,7 +203,6 @@ namespace PasteBin.Migrations
                     ViewID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PasteID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ViewedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CurrentUserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>

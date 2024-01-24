@@ -8,13 +8,13 @@
         data: { Title: title, Content: content },
         success: function (result) {
             if (result.success) {
-                alert(result.message);
+                console.log(result.message);
             } else {
-                alert("Error creating paste: " + result.message);
+                console.log("Error creating paste: " + result.message);
             }
         },
         error: function (error) {
-            alert("Error creating paste: " + error.responseText);
+            console.log("Error creating paste: " + error.responseText);
         }
     });
 })

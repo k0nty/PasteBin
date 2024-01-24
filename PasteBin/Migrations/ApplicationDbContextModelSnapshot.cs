@@ -239,9 +239,6 @@ namespace PasteBin.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("CurrentUserID")
                         .HasColumnType("nvarchar(450)");
 
@@ -299,9 +296,6 @@ namespace PasteBin.Migrations
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ViewedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ViewID");
 

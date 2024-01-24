@@ -9,7 +9,6 @@ namespace PasteBin.Models
         public string? ViewID { get; set; }
         public string? PasteID { get; set;}
         public string? UserID { get; set;}
-        public DateTime? ViewedAt { get; set;}
         public Pastes? Pastes{ get; set;}
 
         [ForeignKey("User")]
