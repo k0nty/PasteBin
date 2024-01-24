@@ -12,7 +12,7 @@ using PasteBin.Data;
 namespace PasteBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240123230418_MigrationDB")]
+    [Migration("20240124084828_MigrationDB")]
     partial class MigrationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,6 +207,9 @@ namespace PasteBin.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")

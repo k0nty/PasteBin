@@ -31,6 +31,7 @@ namespace PasteBin.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
 
 
@@ -40,6 +41,7 @@ namespace PasteBin.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context)
         {
             _userManager = userManager;
@@ -48,6 +50,7 @@ namespace PasteBin.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
             _context = context; // Ініціалізація поля контексту
         }
 
@@ -79,6 +82,10 @@ namespace PasteBin.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Name")]
             public string Name { get; set; }
+
+            [Required]
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
 
 
 
@@ -136,6 +143,7 @@ namespace PasteBin.Areas.Identity.Pages.Account
 
 
                 user.Name = Input.Name;
+                user.Surname = Input.Surname;
 
 
                 if (result.Succeeded)
@@ -147,15 +155,13 @@ namespace PasteBin.Areas.Identity.Pages.Account
                     };
 
                     _context.Users.Add(customer);
-
                     _context.SaveChanges();
-                    var roleExists = await _userManager.GetRolesAsync(user);
-                    if (!roleExists.Contains("User"))
+                    var roleExists = await _roleManager.RoleExistsAsync("User");
+                    if (!roleExists)
                     {
-                        await _userManager.AddToRoleAsync(user, "User");
+                        
+                        await _roleManager.CreateAsync(new IdentityRole("User"));
                     }
-
-                    // Add user to the "User" role
                     await _userManager.AddToRoleAsync(user, "User");
                     _context.SaveChanges();
                     _logger.LogInformation("User created a new account with password.");
