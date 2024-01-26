@@ -35,8 +35,7 @@ namespace PasteBin.Data
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.Property(u => u.Name);
-            builder.Property(u => u.Surname);
+            builder.Property(u => u.NickName);
         }
 
     }

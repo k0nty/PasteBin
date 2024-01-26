@@ -81,13 +81,7 @@ namespace PasteBin.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "Name")]
-            public string Name { get; set; }
-
-            [Required]
-            [Display(Name = "Surname")]
-            public string Surname { get; set; }
-
-
+            public string NickName { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -142,8 +136,7 @@ namespace PasteBin.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
 
-                user.Name = Input.Name;
-                user.Surname = Input.Surname;
+                user.NickName = Input.NickName;
 
 
                 if (result.Succeeded)
