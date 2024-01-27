@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PasteBin.Migrations
 {
-    public partial class MigratioDB : Migration
+    public partial class MigrationDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

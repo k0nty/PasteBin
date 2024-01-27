@@ -47,6 +47,13 @@ namespace PasteBin.Controllers
             return Json(new { success = false, message = "Invalid data" });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Pastes() {
+            var paste = _context.Pastes.ToList();
+            if (paste == null) return NotFound();
+            return View(paste);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

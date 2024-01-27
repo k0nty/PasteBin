@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PasteBin.Data;
 using PasteBin.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
+
+app.MapControllerRoute(
+name: "default",
+    pattern: "{ controller = Home}/{ action = Pastes}/{id?}");
 app.MapRazorPages();
 
 app.Run();

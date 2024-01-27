@@ -12,8 +12,8 @@ using PasteBin.Data;
 namespace PasteBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240126203408_MigratioDB")]
-    partial class MigratioDB
+    [Migration("20240127124944_MigrationDB")]
+    partial class MigrationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
