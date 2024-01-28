@@ -15,20 +15,7 @@ namespace PasteBin.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Pastes> Pastes { get; set; }
-        public DbSet<View> Views { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-
-            builder.Entity<Pastes>()
-                .HasOne(p => p.View)
-                .WithOne(v => v.Pastes)
-                .HasForeignKey<View>(v => v.PasteID)
-                .OnDelete(DeleteBehavior.Cascade);
-                
-            builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
-        }
     }
    
     public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>

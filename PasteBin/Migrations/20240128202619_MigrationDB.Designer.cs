@@ -12,7 +12,7 @@ using PasteBin.Data;
 namespace PasteBin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240127124944_MigrationDB")]
+    [Migration("20240128202619_MigrationDB")]
     partial class MigrationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -281,32 +281,6 @@ namespace PasteBin.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PasteBin.Models.View", b =>
-                {
-                    b.Property<string>("ViewID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CurrentUserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PasteID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ViewID");
-
-                    b.HasIndex("CurrentUserID");
-
-                    b.HasIndex("PasteID")
-                        .IsUnique()
-                        .HasFilter("[PasteID] IS NOT NULL");
-
-                    b.ToTable("Views");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -376,30 +350,9 @@ namespace PasteBin.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("PasteBin.Models.View", b =>
-                {
-                    b.HasOne("PasteBin.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("CurrentUserID");
-
-                    b.HasOne("PasteBin.Models.Pastes", "Pastes")
-                        .WithOne("View")
-                        .HasForeignKey("PasteBin.Models.View", "PasteID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Pastes");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("PasteBin.Models.ApplicationUser", b =>
                 {
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PasteBin.Models.Pastes", b =>
-                {
-                    b.Navigation("View");
                 });
 #pragma warning restore 612, 618
         }

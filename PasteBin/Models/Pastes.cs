@@ -13,8 +13,6 @@ namespace PasteBin.Models
 
         public DateTime? ExpirationData { get; set; }
 
-        public View? View { get; set; }
-
         [ForeignKey("User")]
         public string? CurrentUserID { get; set; }
         public User? User { get; set; }

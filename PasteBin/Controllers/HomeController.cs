@@ -5,6 +5,7 @@ using PasteBin.Data;
 using PasteBin.Models;
 using System;
 using System.Diagnostics;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PasteBin.Controllers
@@ -25,31 +26,38 @@ namespace PasteBin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPaste([Bind("PastesID,Link,Title,Content,ExpirationData,CurrentUserID")] Pastes paste)
+        [Authorize]
+        public async Task<IActionResult> AddPaste([Bind("PastesID,Link,Title,Content,ExpirationData")] Pastes paste)
         {
             if (ModelState.IsValid)
             {
                 paste.Link = Guid.NewGuid().ToString("N").Substring(0, 10);
                 paste.ExpirationData = DateTime.Now.AddHours(24);
+
+                // Отримайте ідентифікатор поточного користувача
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Знайдіть користувача за ідентифікатором
+                var user = await _context.Users.FindAsync(userId);
+
+                // Встановіть користувача для пасту
+                paste.User = user;
+
                 _context.Add(paste);
 
                 try
                 {
                     await _context.SaveChangesAsync();
-
-                    // Передайте посилання на ViewPaste в представлення
                     var pasteLink = Url.Action("ViewPaste", new { link = paste.Link });
                     return Json(new { success = true, message = "Paste created successfully", link = pasteLink });
                 }
                 catch (Exception ex)
                 {
-                    // Обробка помилок при збереженні в базу даних.
                     Console.WriteLine("Error saving paste to database: " + ex.Message);
                     return Json(new { success = false, message = "Error saving paste to database" });
                 }
             }
 
-            // Обробка випадку, коли дані невірні.
             return Json(new { success = false, message = "Invalid data" });
         }
 

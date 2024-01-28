@@ -195,31 +195,6 @@ namespace PasteBin.Migrations
                         principalColumn: "UserID");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Views",
-                columns: table => new
-                {
-                    ViewID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PasteID = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CurrentUserID = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Views", x => x.ViewID);
-                    table.ForeignKey(
-                        name: "FK_Views_Pastes_PasteID",
-                        column: x => x.PasteID,
-                        principalTable: "Pastes",
-                        principalColumn: "PastesID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Views_Users_CurrentUserID",
-                        column: x => x.CurrentUserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -270,18 +245,6 @@ namespace PasteBin.Migrations
                 column: "ApplicationUserId",
                 unique: true,
                 filter: "[ApplicationUserId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Views_CurrentUserID",
-                table: "Views",
-                column: "CurrentUserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Views_PasteID",
-                table: "Views",
-                column: "PasteID",
-                unique: true,
-                filter: "[PasteID] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -302,13 +265,10 @@ namespace PasteBin.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Views");
+                name: "Pastes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Pastes");
 
             migrationBuilder.DropTable(
                 name: "Users");

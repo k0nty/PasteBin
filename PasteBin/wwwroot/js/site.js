@@ -20,5 +20,10 @@
                 console.log("Error creating paste: " + result.message);
             }
         },
+        error: function (xhr) {
+            if (xhr.status == 401) {
+                alert("Unauthorized. Redirecting to login page.");
+            }
+        },
     });
 })
