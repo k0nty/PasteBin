@@ -11,6 +11,10 @@
                 console.log(result.message);
                 if (result.link) {
                     console.log("Created paste link: " + result.link);
+
+                    // Вставити посилання у відповідний елемент HTML
+                    $("#createdPasteLink #pasteLink").attr("href", result.link).text(result.link);
+                    $("#createdPasteLink").show();
                 }
             } else {
                 console.log("Error creating paste: " + result.message);
