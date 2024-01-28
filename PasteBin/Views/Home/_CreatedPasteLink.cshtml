@@ -1,0 +1,11 @@
+﻿@{
+    var createdPasteLink = ViewData["CreatedPasteLink"] as string;
+}
+
+@if (!string.IsNullOrEmpty(createdPasteLink))
+{
+    <div id="createdPasteLink">
+        <label for="pasteLink">Created Paste Link:</label>
+        <input class="form-control" id="pasteLink" value="@createdPasteLink" readonly />
+    </div>
+}

@@ -1,0 +1,10 @@
+﻿@model PasteBin.Models.Pastes
+
+@{
+    ViewData["Title"] = "View Paste";
+}
+
+<h2>@Model.Title</h2>
+<p>@Model.Content</p>
+
+<a asp-action="Index">Back to Home</a>

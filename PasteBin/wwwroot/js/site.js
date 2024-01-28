@@ -9,12 +9,12 @@
         success: function (result) {
             if (result.success) {
                 console.log(result.message);
+                if (result.link) {
+                    console.log("Created paste link: " + result.link);
+                }
             } else {
                 console.log("Error creating paste: " + result.message);
             }
         },
-        error: function (error) {
-            console.log("Error creating paste: " + error.responseText);
-        }
     });
 })

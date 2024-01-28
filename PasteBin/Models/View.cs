@@ -7,7 +7,7 @@ namespace PasteBin.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string? ViewID { get; set; }
-        public string? PasteID { get; set;}
+        public string? PasteID { get; set;} 
         public string? UserID { get; set;}
         public Pastes? Pastes{ get; set;}
 

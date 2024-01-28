@@ -1,7 +1,9 @@
-﻿@{
+﻿@model PasteBin.Models.Pastes
+
+@{
     ViewData["Title"] = "PasteBin";
 }
--
+
 <h1>Create New Paste</h1>
 
 <form id="createPasteForm">
@@ -13,8 +15,10 @@
     </div>
 
     <button id="createPaste" type="button" class="btn btn-primary mt-4 w-100">Create Paste</button>
-</form>
 
-<form method="get" asp-page="/Paste/Pastes.cshtml">
-    <button id="createPaste" type="button" class="btn btn-primary mt-4 w-100">View Pastes</button>
+    <!-- Додайте елемент для відображення створеного посилання -->
+    <div id="createdPasteLink" style="display:none">
+        <label for="pasteLink">Created Paste Link:</label>
+        <input class="form-control" id="pasteLink" readonly />
+    </div>
 </form>

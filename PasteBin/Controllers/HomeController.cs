@@ -3,29 +3,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PasteBin.Data;
 using PasteBin.Models;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PasteBin.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly ApplicationDbContext _context;
 
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
         }
-        [AllowAnonymous]
+
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var pastes = await _context.Pastes.ToListAsync();
-            return View(pastes);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPaste([Bind("PastesID,Link,Title,Content,CreatedAt,ExpirationData,CurrentUserID")] Pastes paste)
+        public async Task<IActionResult> AddPaste([Bind("PastesID,Link,Title,Content,ExpirationData,CurrentUserID")] Pastes paste)
         {
             if (ModelState.IsValid)
             {
@@ -36,21 +36,42 @@ namespace PasteBin.Controllers
                 try
                 {
                     await _context.SaveChangesAsync();
-                    return Json(new { success = true, message = "Paste created successfully" });
+
+                    // Передайте посилання на ViewPaste в представлення
+                    var pasteLink = Url.Action("ViewPaste", new { link = paste.Link });
+                    return Json(new { success = true, message = "Paste created successfully", link = pasteLink });
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { success = false, message = "Error saving paste to database: " + ex.Message });
+                    // Обробка помилок при збереженні в базу даних.
+                    Console.WriteLine("Error saving paste to database: " + ex.Message);
+                    return Json(new { success = false, message = "Error saving paste to database" });
                 }
             }
 
+            // Обробка випадку, коли дані невірні.
             return Json(new { success = false, message = "Invalid data" });
         }
 
+
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Pastes() {
-            var paste = _context.Pastes.ToList();
-            if (paste == null) return NotFound();
+        public async Task<IActionResult> ViewPaste(string link)
+        {
+            if (string.IsNullOrEmpty(link))
+            {
+                // Обробка випадку, коли посилання не вказане.
+                return RedirectToAction("Index");
+            }
+
+            var paste = await _context.Pastes.FirstOrDefaultAsync(p => p.Link == link);
+
+            if (paste == null)
+            {
+                // Обробка випадку, коли паста з вказаним посиланням не знайдена.
+                return RedirectToAction("Index");
+            }
+
             return View(paste);
         }
 
